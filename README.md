@@ -30,7 +30,7 @@ npm run dev
 
 Without an API key, the built-in matcher uses the Asian foods database with intelligent fallback estimates.
 
-## Production
+## Production (self-hosted)
 
 ```bash
 npm run build
@@ -38,6 +38,41 @@ npm start
 ```
 
 Serves the built app and API on port 3001.
+
+## Deploy to Netlify
+
+The app is configured for Netlify out of the box — static frontend plus serverless functions for the AI API.
+
+### Option A: Deploy from GitHub (recommended)
+
+1. Go to [app.netlify.com](https://app.netlify.com) and sign in
+2. Click **Add new site** → **Import an existing project**
+3. Connect your GitHub account and select the **MyWeightLossPlan** repo
+4. Netlify will read `netlify.toml` automatically:
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+5. Click **Deploy site**
+
+After the first deploy, your app will be live at a URL like `https://random-name.netlify.app`.
+
+### Option B: Deploy from the CLI
+
+```bash
+npm install
+npx netlify login
+npx netlify init
+npx netlify deploy --prod
+```
+
+### Optional: OpenAI on Netlify
+
+For enhanced AI food identification in production:
+
+1. In Netlify, go to **Site settings** → **Environment variables**
+2. Add `OPENAI_API_KEY` with your API key
+3. Redeploy the site
+
+Without it, the built-in smart matcher still works.
 
 ## Tech Stack
 
